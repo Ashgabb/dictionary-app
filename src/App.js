@@ -8,6 +8,7 @@ import Header from './Components/Header/Header';
 function App() {
   const [word, setWord] = useState("");
   const [meanings, setMeanings] = useState([]);
+  const [category, setCategory] = useState("en");
 
   const dictionaryApi = async() => {
     try {
@@ -27,6 +28,7 @@ function App() {
   },[])
   return (
     <div className="App">
+      <h1>Digictionary</h1>
       <Container maxWidth="md">
         <Header />
       </Container>
