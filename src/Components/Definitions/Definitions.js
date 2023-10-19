@@ -19,7 +19,7 @@ meanings.map((mean) => mean.meanings.map((item) => (
                         {def.example}
                     </span>
                 )}
-                <br/>
+              
             {def.synonyms && (
                     <span>
                         <b>Synonyms: </b>
