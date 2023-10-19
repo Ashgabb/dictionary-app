@@ -2,9 +2,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import React from 'react'
 import "./Header.css";
 import { MenuItem, TextField } from "@mui/material"
-import category from "../../data/category.js";
+import categories from "../../data/category.js";
+import { Language } from '@mui/icons-material';
 
-const Header = () => {
+const Header = ({setCategory, category, word, setWord}) => {
     const darkTheme = createTheme({
         palette: {
           primary: {
@@ -13,20 +14,35 @@ const Header = () => {
           type: "dark",
         },
       });
+
+      const handleChange = (Language) => {
+        setCategory(Language);
+        setWord("");
+      }
   return (
     <div className='header'>
 
-      <span className='title'>Digictionary</span>
+      <span className='title'>{word ? word : "Digiword"}</span>
       <div className='inputs'>
         <ThemeProvider theme={darkTheme}>
-        <TextField id="standard-basic" label="Standard" variant="standard" />
-        <TextField id="standard - select-currency"
+        <TextField 
+          className='search' 
+          label="Search a word" 
+          // eslint-disable-next-line react/jsx-no-duplicate-props
+          label="Search a Word" 
+                  value={word}
+                  onChange={(e)=>setWord(e.target.value)}
+        />
+        
+        <TextField className='select'
         select
         label="Language"
+                value={category}
+                onChange={(e)=>handleChange(e.target.value)}
         helperText="Please select language"
         >
             {
-                category.map((option) => (
+                categories.map((option) => (
                     <MenuItem key={option.label} value={option.label}>
                         { option.value }
                     </MenuItem>

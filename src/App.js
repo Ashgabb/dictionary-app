@@ -3,6 +3,7 @@ import './App.css';
 import {useEffect, useState}  from 'react';
 import { Container } from '@mui/material';
 import Header from './Components/Header/Header';
+import Definitions from './Components/Definitions/Definitions';
 
 
 function App() {
@@ -12,7 +13,9 @@ function App() {
 
   const dictionaryApi = async() => {
     try {
-      const data=await axios.get('https://api.dictionaryapi.dev/api/v2/entries/en/plane');
+      const data=await axios.get(
+        `https://api.dictionaryapi.dev/api/v2/entries/${category}/${word}`
+        );
 
       
       setMeanings(data.data);
@@ -21,16 +24,24 @@ function App() {
     }
   };
 
-  console.log(meanings);
+  // console.log(meanings);
 
   useEffect(() => {
     dictionaryApi();
-  },[])
+  },[word, category])
   return (
     <div className="App">
-      <h1>Digictionary</h1>
+      
       <Container maxWidth="md">
-        <Header />
+        <Header 
+          category={category} 
+          setCategory={setCategory} 
+          word={word} 
+          setWord={setWord} 
+        />
+        {meanings && (
+        <Definitions word={word} meanings={meanings} category={category} />
+      )}
       </Container>
     </div>
   );
