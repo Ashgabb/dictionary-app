@@ -26,8 +26,7 @@ const Header = ({setCategory, category, word, setWord}) => {
       <div className='inputs'>
         <ThemeProvider theme={darkTheme}>
         <TextField 
-          className='search' 
-          label="Search a word" 
+          className='search'  
           // eslint-disable-next-line react/jsx-no-duplicate-props
           label="Search a Word" 
                   value={word}
